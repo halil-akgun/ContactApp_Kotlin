@@ -16,6 +16,9 @@ import androidx.lifecycle.Lifecycle
 import com.example.contactapp_kotlin.databinding.FragmentHomepageBinding
 import com.example.contactapp_kotlin.R
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.contactapp_kotlin.data.entity.Person
+import com.example.contactapp_kotlin.ui.adapter.PersonAdapter
 
 class HomepageFragment : Fragment(), SearchView.OnQueryTextListener {
 
@@ -29,6 +32,14 @@ class HomepageFragment : Fragment(), SearchView.OnQueryTextListener {
 
         binding.toolbarHome.title = "Contacts"
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarHome)
+
+        binding.rv.layoutManager = LinearLayoutManager(requireContext())
+        val personList = ArrayList<Person>()
+        personList.add(Person(1, "John Doe", "1234567890"))
+        personList.add(Person(2, "Jane Doe", "0987654321"))
+
+        val adapter = PersonAdapter(requireContext(), personList)
+        binding.rv.adapter = adapter
 
         binding.fabAdd.setOnClickListener {
             it.findNavController().navigate(R.id.action_homepageFragment_to_addPersonFragment)
@@ -63,5 +74,10 @@ class HomepageFragment : Fragment(), SearchView.OnQueryTextListener {
 
     fun search(query: String) {
         Log.d("HomepageFragment", "query: $query")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("HomepageFragment", "onResume")
     }
 }
