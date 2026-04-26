@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_activity_nav"
+    app:startDestination="@id/homepageFragment">
+
+    <fragment
+        android:id="@+id/homepageFragment"
+        android:name="com.example.contactapp_kotlin.ui.fragment.HomepageFragment"
+        android:label="fragment_homepage"
+        tools:layout="@layout/fragment_homepage" >
+        <action
+            android:id="@+id/action_homepageFragment_to_editPersonFragment"
+            app:destination="@id/editPersonFragment" />
+        <action
+            android:id="@+id/action_homepageFragment_to_addPersonFragment"
+            app:destination="@id/addPersonFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editPersonFragment"
+        android:name="com.example.contactapp_kotlin.ui.fragment.EditPersonFragment"
+        android:label="fragment_edit_person"
+        tools:layout="@layout/fragment_edit_person" >
+        <argument
+            android:name="person"
+            app:argType="com.example.contactapp_kotlin.data.entity.Person" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPersonFragment"
+        android:name="com.example.contactapp_kotlin.ui.fragment.AddPersonFragment"
+        android:label="fragment_add_person"
+        tools:layout="@layout/fragment_add_person" />
+</navigation>
