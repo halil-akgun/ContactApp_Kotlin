@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.navArgs
+import com.example.contactapp_kotlin.R
 import com.example.contactapp_kotlin.databinding.FragmentEditPersonBinding
 
 class EditPersonFragment : Fragment() {
@@ -17,11 +19,15 @@ class EditPersonFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentEditPersonBinding.inflate(inflater, container, false)
-        binding.toolbarEdit.title = "Edit Person"
+//        binding = FragmentEditPersonBinding.inflate(inflater, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_edit_person, container, false)
 
         val bundle: EditPersonFragmentArgs by navArgs()
         val person = bundle.person
+
+        binding.person = person
+//        binding.toolbarEdit.title = "Edit Person"
+        binding.editPersonToolbar = "Edit Person"
 
         binding.textinputName.setText(person.name)
         binding.textinputTel.setText(person.tel)

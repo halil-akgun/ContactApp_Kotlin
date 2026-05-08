@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import com.example.contactapp_kotlin.R
 import com.example.contactapp_kotlin.databinding.FragmentAddPersonBinding
 
 class AddPersonFragment : Fragment() {
@@ -16,21 +18,23 @@ class AddPersonFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentAddPersonBinding.inflate(inflater, container, false)
+//        binding = FragmentAddPersonBinding.inflate(inflater, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_person, container, false)
 
-        binding.toolbarAdd.title = "Add Person"
+//        binding.toolbarAdd.title = "Add Person"
+        binding.addPersonToolbar = "Add Person"
 
         binding.buttonAdd.setOnClickListener {
             val name = binding.textinputName.text.toString()
             val tel = binding.textinputTel.text.toString()
 
-            addPerson(name, tel)
+            btnAddPerson(name, tel)
         }
 
         return binding.root
     }
 
-    fun addPerson(name: String, tel: String) {
+    fun btnAddPerson(name: String, tel: String) {
         Log.d("AddPersonFragment", "name: $name, tel: $tel")
     }
 }
