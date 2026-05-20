@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuProvider
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Lifecycle
 import com.example.contactapp_kotlin.databinding.FragmentHomepageBinding
 import com.example.contactapp_kotlin.R
@@ -28,18 +29,21 @@ class HomepageFragment : Fragment(), SearchView.OnQueryTextListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentHomepageBinding.inflate(inflater, container, false)
+//        binding = FragmentHomepageBinding.inflate(inflater, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_homepage, container, false)
 
-        binding.toolbarHome.title = "Contacts"
+//        binding.toolbarHome.title = "Contacts"
+        binding.homeToolbar = "Contacts"
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarHome)
 
-        binding.rv.layoutManager = LinearLayoutManager(requireContext())
+//        binding.rv.layoutManager = LinearLayoutManager(requireContext()) // done in xml
         val personList = ArrayList<Person>()
         personList.add(Person(1, "John Doe", "1234567890"))
         personList.add(Person(2, "Jane Doe", "0987654321"))
 
         val adapter = PersonAdapter(requireContext(), personList)
-        binding.rv.adapter = adapter
+//        binding.rv.adapter = adapter
+        binding.personAdapter = adapter
 
         binding.fabAdd.setOnClickListener {
             it.findNavController().navigate(R.id.action_homepageFragment_to_addPersonFragment)

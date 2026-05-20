@@ -4,12 +4,14 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.contactapp_kotlin.data.entity.Person
 import com.example.contactapp_kotlin.databinding.CardBinding
 import com.example.contactapp_kotlin.ui.fragment.HomepageFragmentDirections
 import com.google.android.material.snackbar.Snackbar
 import androidx.navigation.findNavController
+import com.example.contactapp_kotlin.R
 
 class PersonAdapter(var mContext: Context, var personList: List<Person>) :
     RecyclerView.Adapter<PersonAdapter.CardViewHolder>() {
@@ -23,7 +25,9 @@ class PersonAdapter(var mContext: Context, var personList: List<Person>) :
         viewType: Int
     ): CardViewHolder {
         val layoutInflater = LayoutInflater.from(mContext)
-        val binding = CardBinding.inflate(layoutInflater, parent, false)
+//        val binding = CardBinding.inflate(layoutInflater, parent, false)
+        val binding: CardBinding =
+            DataBindingUtil.inflate(layoutInflater, R.layout.card, parent, false)
         return CardViewHolder(binding)
     }
 
@@ -33,7 +37,8 @@ class PersonAdapter(var mContext: Context, var personList: List<Person>) :
     ) {
         val person = personList[position]
         val binding = holder.binding
-        binding.textViewPersonInfo.text = "${person.name} - ${person.tel}"
+//        binding.textViewPersonInfo.text = "${person.name} - ${person.tel}"
+        binding.person = person
 
         binding.cardRow.setOnClickListener {
             // data transfer
