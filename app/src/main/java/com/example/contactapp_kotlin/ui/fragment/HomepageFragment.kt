@@ -1,7 +1,6 @@
 package com.example.contactapp_kotlin.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
@@ -13,17 +12,24 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuProvider
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import com.example.contactapp_kotlin.databinding.FragmentHomepageBinding
 import com.example.contactapp_kotlin.R
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.contactapp_kotlin.data.entity.Person
 import com.example.contactapp_kotlin.ui.adapter.PersonAdapter
+import com.example.contactapp_kotlin.ui.viewmodel.HomepageViewModel
 
 class HomepageFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private lateinit var binding: FragmentHomepageBinding
+    private lateinit var viewModel: HomepageViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val tempViewModel: HomepageViewModel by viewModels()
+        viewModel = tempViewModel
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,13 +43,12 @@ class HomepageFragment : Fragment(), SearchView.OnQueryTextListener {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarHome)
 
 //        binding.rv.layoutManager = LinearLayoutManager(requireContext()) // done in xml
-        val personList = ArrayList<Person>()
-        personList.add(Person(1, "John Doe", "1234567890"))
-        personList.add(Person(2, "Jane Doe", "0987654321"))
 
-        val adapter = PersonAdapter(requireContext(), personList)
+        viewModel.personListLiveData.observe(viewLifecycleOwner){
+            val adapter = PersonAdapter(requireContext(), it, viewModel)
 //        binding.rv.adapter = adapter
-        binding.personAdapter = adapter
+            binding.personAdapter = adapter
+        }
 
         binding.fabAdd.setOnClickListener {
             it.findNavController().navigate(R.id.action_homepageFragment_to_addPersonFragment)
@@ -67,21 +72,17 @@ class HomepageFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextSubmit(query: String): Boolean {
-        search(query)
+        viewModel.search(query)
         return true
     }
 
     override fun onQueryTextChange(query: String): Boolean {
-        search(query)
+        viewModel.search(query)
         return true
-    }
-
-    fun search(query: String) {
-        Log.d("HomepageFragment", "query: $query")
     }
 
     override fun onResume() {
         super.onResume()
-        Log.d("HomepageFragment", "onResume")
+        viewModel.loadAllPerson()
     }
 }

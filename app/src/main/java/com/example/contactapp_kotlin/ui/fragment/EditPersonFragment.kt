@@ -7,13 +7,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.contactapp_kotlin.R
 import com.example.contactapp_kotlin.databinding.FragmentEditPersonBinding
+import com.example.contactapp_kotlin.ui.viewmodel.EditPersonViewModel
+import kotlin.getValue
 
 class EditPersonFragment : Fragment() {
 
     private lateinit var binding: FragmentEditPersonBinding
+    private lateinit var viewModel: EditPersonViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val tempViewModel: EditPersonViewModel by viewModels()
+        viewModel = tempViewModel
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +53,6 @@ class EditPersonFragment : Fragment() {
     }
 
     private fun editPerson(name: String, tel: String) {
-        Log.d("EditPersonFragment", "name: $name, tel: $tel")
+        viewModel.edit(name, tel)
     }
 }

@@ -14,6 +14,7 @@ navigationUiKtx = "2.9.8"
 fragment = "1.8.9"
 cardview = "1.0.0"
 recyclerview = "1.4.0"
+lifecycleViewModelKtx = "2.10.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -30,8 +31,8 @@ androidx-fragment = { group = "androidx.fragment", name = "fragment", version.re
 navigation-safe-args-gradle-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigationSafeArgsGradlePlugin" }
 androidx-cardview = { group = "androidx.cardview", name = "cardview", version.ref = "cardview" }
 androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
+androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewModelKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-navigation-safe-args-gradle-plugin = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigationSafeArgsGradlePlugin" }
 

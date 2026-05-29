@@ -12,8 +12,13 @@ import com.example.contactapp_kotlin.ui.fragment.HomepageFragmentDirections
 import com.google.android.material.snackbar.Snackbar
 import androidx.navigation.findNavController
 import com.example.contactapp_kotlin.R
+import com.example.contactapp_kotlin.ui.viewmodel.HomepageViewModel
 
-class PersonAdapter(var mContext: Context, var personList: List<Person>) :
+class PersonAdapter(
+    var mContext: Context,
+    var personList: List<Person>,
+    var viewModel: HomepageViewModel
+) :
     RecyclerView.Adapter<PersonAdapter.CardViewHolder>() {
 
     inner class CardViewHolder(view: CardBinding) : RecyclerView.ViewHolder(view.root) {
@@ -50,7 +55,7 @@ class PersonAdapter(var mContext: Context, var personList: List<Person>) :
         binding.imageViewDelete.setOnClickListener {
             Snackbar.make(it, "Delete person? : ${person.name}", Snackbar.LENGTH_LONG)
                 .setAction("Delete") {
-                    Log.d("PersonAdapter", "Delete person: ${person.name}")
+                    viewModel.delete(person.id)
                 }
                 .show()
         }

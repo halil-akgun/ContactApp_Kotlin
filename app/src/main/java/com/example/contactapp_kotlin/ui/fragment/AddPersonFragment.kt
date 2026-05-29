@@ -7,12 +7,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import com.example.contactapp_kotlin.R
 import com.example.contactapp_kotlin.databinding.FragmentAddPersonBinding
+import com.example.contactapp_kotlin.ui.viewmodel.AddPersonViewModel
+import kotlin.getValue
 
 class AddPersonFragment : Fragment() {
 
     private lateinit var binding: FragmentAddPersonBinding
+    private lateinit var viewModel: AddPersonViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val tempViewModel: AddPersonViewModel by viewModels()
+        viewModel = tempViewModel
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +45,6 @@ class AddPersonFragment : Fragment() {
     }
 
     fun btnAddPerson(name: String, tel: String) {
-        Log.d("AddPersonFragment", "name: $name, tel: $tel")
+        viewModel.add(name, tel)
     }
 }
