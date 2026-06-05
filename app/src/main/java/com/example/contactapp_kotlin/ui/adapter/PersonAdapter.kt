@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.contactapp_kotlin.data.entity.Person
 import com.example.contactapp_kotlin.databinding.CardBinding
@@ -13,6 +14,7 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.navigation.findNavController
 import com.example.contactapp_kotlin.R
 import com.example.contactapp_kotlin.ui.viewmodel.HomepageViewModel
+import com.example.contactapp_kotlin.utils.switch
 
 class PersonAdapter(
     var mContext: Context,
@@ -49,7 +51,8 @@ class PersonAdapter(
             // data transfer
             val action =
                 HomepageFragmentDirections.actionHomepageFragmentToEditPersonFragment(person = person)
-            it.findNavController().navigate(action)
+//            it.findNavController().navigate(action)
+            Navigation.switch(it, action)
         }
 
         binding.imageViewDelete.setOnClickListener {

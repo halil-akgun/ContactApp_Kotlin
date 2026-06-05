@@ -14,11 +14,13 @@ import androidx.core.view.MenuProvider
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.Navigation
 import com.example.contactapp_kotlin.databinding.FragmentHomepageBinding
 import com.example.contactapp_kotlin.R
 import androidx.navigation.findNavController
 import com.example.contactapp_kotlin.ui.adapter.PersonAdapter
 import com.example.contactapp_kotlin.ui.viewmodel.HomepageViewModel
+import com.example.contactapp_kotlin.utils.switch
 
 class HomepageFragment : Fragment(), SearchView.OnQueryTextListener {
 
@@ -44,14 +46,15 @@ class HomepageFragment : Fragment(), SearchView.OnQueryTextListener {
 
 //        binding.rv.layoutManager = LinearLayoutManager(requireContext()) // done in xml
 
-        viewModel.personListLiveData.observe(viewLifecycleOwner){
+        viewModel.personListLiveData.observe(viewLifecycleOwner) {
             val adapter = PersonAdapter(requireContext(), it, viewModel)
 //        binding.rv.adapter = adapter
             binding.personAdapter = adapter
         }
 
         binding.fabAdd.setOnClickListener {
-            it.findNavController().navigate(R.id.action_homepageFragment_to_addPersonFragment)
+//            it.findNavController().navigate(R.id.action_homepageFragment_to_addPersonFragment)
+            Navigation.switch(it, R.id.action_homepageFragment_to_addPersonFragment)
         }
 
         requireActivity().addMenuProvider(object : MenuProvider {
