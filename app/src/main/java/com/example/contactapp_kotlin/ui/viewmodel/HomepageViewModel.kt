@@ -4,9 +4,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.contactapp_kotlin.data.entity.Person
 import com.example.contactapp_kotlin.data.repo.PersonDaoRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class HomepageViewModel : ViewModel() {
-    private val personDaoRepository = PersonDaoRepository()
+@HiltViewModel
+class HomepageViewModel @Inject constructor(var personDaoRepository: PersonDaoRepository) :
+    ViewModel() {
     var personListLiveData: MutableLiveData<List<Person>> = MutableLiveData()
 
     init {

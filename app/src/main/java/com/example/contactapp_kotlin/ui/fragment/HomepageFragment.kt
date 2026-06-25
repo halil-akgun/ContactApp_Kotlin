@@ -21,7 +21,9 @@ import androidx.navigation.findNavController
 import com.example.contactapp_kotlin.ui.adapter.PersonAdapter
 import com.example.contactapp_kotlin.ui.viewmodel.HomepageViewModel
 import com.example.contactapp_kotlin.utils.switch
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomepageFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private lateinit var binding: FragmentHomepageBinding

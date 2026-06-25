@@ -11,8 +11,10 @@ import androidx.fragment.app.viewModels
 import com.example.contactapp_kotlin.R
 import com.example.contactapp_kotlin.databinding.FragmentAddPersonBinding
 import com.example.contactapp_kotlin.ui.viewmodel.AddPersonViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlin.getValue
 
+@AndroidEntryPoint
 class AddPersonFragment : Fragment() {
 
     private lateinit var binding: FragmentAddPersonBinding

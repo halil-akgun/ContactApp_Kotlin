@@ -12,8 +12,10 @@ import androidx.navigation.fragment.navArgs
 import com.example.contactapp_kotlin.R
 import com.example.contactapp_kotlin.databinding.FragmentEditPersonBinding
 import com.example.contactapp_kotlin.ui.viewmodel.EditPersonViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlin.getValue
 
+@AndroidEntryPoint
 class EditPersonFragment : Fragment() {
 
     private lateinit var binding: FragmentEditPersonBinding

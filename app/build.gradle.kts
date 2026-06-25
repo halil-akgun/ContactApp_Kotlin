@@ -1,5 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.hilt.android)
+    alias(libs.plugins.ksp)
 }
 
 buildscript {
@@ -63,4 +65,8 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
+    // Hilt - dependency injection
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
 }
