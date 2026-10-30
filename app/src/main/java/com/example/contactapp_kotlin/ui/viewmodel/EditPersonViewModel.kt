@@ -9,7 +9,7 @@ import javax.inject.Inject
 @HiltViewModel
 class EditPersonViewModel @Inject constructor(var personDaoRepository: PersonDaoRepository) :
     ViewModel() {
-    fun edit(name: String, tel: String) {
-        personDaoRepository.editPerson(name, tel)
+    fun edit(id: Int, name: String, tel: String) {
+        personDaoRepository.editPerson(id, name, tel)
     }
 }

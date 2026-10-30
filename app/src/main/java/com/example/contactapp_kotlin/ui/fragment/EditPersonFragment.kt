@@ -48,13 +48,13 @@ class EditPersonFragment : Fragment() {
             val name = binding.textinputName.text.toString()
             val tel = binding.textinputTel.text.toString()
 
-            editPerson(name, tel)
+            editPerson(person.id, name, tel)
         }
 
         return binding.root
     }
 
-    private fun editPerson(name: String, tel: String) {
-        viewModel.edit(name, tel)
+    private fun editPerson(id: Int, name: String, tel: String) {
+        viewModel.edit(id, name, tel)
     }
 }

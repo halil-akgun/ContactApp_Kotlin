@@ -3,8 +3,12 @@ package com.example.contactapp_kotlin.data.repo
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.contactapp_kotlin.data.entity.Person
+import com.example.contactapp_kotlin.data.room.PersonDao
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class PersonDaoRepository {
+class PersonDaoRepository(private var personDao: PersonDao) {
     var personListLiveData: MutableLiveData<List<Person>> = MutableLiveData()
 
     fun getPersonList(): MutableLiveData<List<Person>> {
@@ -12,25 +16,36 @@ class PersonDaoRepository {
     }
 
     fun addPerson(name: String, tel: String) {
-        Log.d("AddPersonFragment", "name: $name, tel: $tel")
+        val job = CoroutineScope(Dispatchers.Main).launch {
+            val person = Person(0, name, tel)
+            personDao.insert(person)
+        }
     }
 
-    fun editPerson(name: String, tel: String) {
-        Log.d("EditPersonFragment", "name: $name, tel: $tel")
+    fun editPerson(id: Int, name: String, tel: String) {
+        val job = CoroutineScope(Dispatchers.Main).launch {
+            val person = Person(id, name, tel)
+            personDao.update(person)
+        }
     }
 
     fun searchPerson(query: String) {
-        Log.d("HomepageFragment", "query: $query")
+        val job = CoroutineScope(Dispatchers.Main).launch {
+            personListLiveData.value = personDao.filter(query)
+        }
     }
 
     fun deletePerson(id: Int) {
-        Log.d("HomepageFragment", "id: $id")
+        val job = CoroutineScope(Dispatchers.Main).launch {
+            val person = Person(id, "", "")
+            personDao.delete(person)
+            getAllPerson()
+        }
     }
 
     fun getAllPerson() {
-        val personList = ArrayList<Person>()
-        personList.add(Person(1, "John Doe", "1234567890"))
-        personList.add(Person(2, "Jane Doe", "0987654321"))
-        personListLiveData.value = personList
+        val job = CoroutineScope(Dispatchers.Main).launch {
+            personListLiveData.value = personDao.getAll()
+        }
     }
 }
